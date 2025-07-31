@@ -1,7 +1,3 @@
-// write a function that uses setTimeOut to simulate fetching a user's name after 3 seconds
-// rewrite this function to work with promises
-// rewrite it again using async/await
-// Bonus: Fetch two users' data in parallel using promise.all and async/await
 
 console.log("Start!!!")
 
