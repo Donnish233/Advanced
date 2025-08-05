@@ -1,0 +1,33 @@
+h1 {
+    color: #333;
+   }
+.user {
+    border-bottom: 2px solid #ccc;
+    padding: 10px 0;
+ }
+#user-list{
+    background-color: antiquewhite;
+    padding: 10px;
+    border-radius: 5px;
+}
+#errMsg{
+    display: none;
+    z-index: 20;
+    position: fixed;
+    top: 45%;
+    left: 45%;
+    background-color: moccasin;
+    & p{
+        color: red;
+    } 
+}
+button{
+    background-color: green;
+    border: none;
+    border-radius: 8px;
+    width: 10em;
+    height: 2em;
+    color: white;
+    position: relative;
+    left: 45%;
+}
