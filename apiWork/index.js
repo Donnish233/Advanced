@@ -22,3 +22,4 @@ function getUsers() {
             errMsg.style.display("block");
         });
 }
+addEventListener('click')
