@@ -18,16 +18,18 @@ function tasksOutput(filter) {
 
   filterList.forEach((task) => {
     const li = document.createElement("li");
-    li.innerHTML = `<div class="flex bg-gray-400 mx-auto w-md justify-around p-2 text-center mt-4">
+    li.innerHTML = `<div class="flex bg-gray-400 w-full justify-between p-2 my-2">
         <span class = "${task.completed ? "line-through" : " "}">
         ${task.text}
         </span>
-        <button onclick ="toggleTask(${
+        <span class="flex justify-between gap-4">
+        <button onclick ="toggleTask(${task.id})" class ="${
+      task.completed ? "text-blue-500" : " text-green-600"
+    }">${task.completed ? "Undo" : "Completed"}</button>
+        <button onclick = "deleteTask(${
           task.id
-        })" class ="text-center mx-auto">${
-      task.completed ? "Undo" : "Completed"
-    }</button>
-        <button onclick = "deleteTask(${task.id})"> Delete </button>
+        })" class ="text-red-500"> Delete </button>
+        </span>
         </div>`;
 
     taskList.appendChild(li);
@@ -51,7 +53,13 @@ taskForm.addEventListener("submit", (e) => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 
     taskInput.value = "";
-    tasksOutput("all");
+    if (taskList.classList.contains("comp")) {
+      tasksOutput("completed");
+    } else if (taskList.classList.contains("pend")) {
+      tasksOutput("pending");
+    } else {
+      tasksOutput("all");
+    }
   }
 });
 
@@ -61,7 +69,7 @@ function toggleTask(id) {
   );
   localStorage.setItem("tasks", JSON.stringify(tasks));
   if (taskList.classList.contains("comp")) {
-    tasksOutput("complete");
+    tasksOutput("completed");
   } else if (taskList.classList.contains("pend")) {
     tasksOutput("pending");
   } else {
@@ -73,7 +81,7 @@ function deleteTask(id) {
   tasks = tasks.filter((task) => task.id !== id);
   localStorage.setItem("tasks", JSON.stringify(tasks));
   if (taskList.classList.contains("comp")) {
-    tasksOutput("complete");
+    tasksOutput("completed");
   } else if (taskList.classList.contains("pend")) {
     tasksOutput("pending");
   } else {
@@ -84,17 +92,26 @@ allBtn.addEventListener("click", () => {
   taskList.classList.remove("comp");
   taskList.classList.remove("pend");
   taskList.classList.add("all");
+  allBtn.classList.add("border", "border-4", "border-green-500");
+  completedBtn.classList.remove("border", "border-4", "border-green-500");
+  pendingBtn.classList.remove("border", "border-4", "border-green-500");
   tasksOutput("all");
 });
 completedBtn.addEventListener("click", () => {
   taskList.classList.remove("all");
   taskList.classList.remove("pend");
   taskList.classList.add("comp");
+  completedBtn.classList.add("border", "border-4", "border-green-500");
+  allBtn.classList.remove("border", "border-4", "border-green-500");
+  pendingBtn.classList.remove("border", "border-4", "border-green-500");
   tasksOutput("completed");
 });
 pendingBtn.addEventListener("click", () => {
   taskList.classList.remove("all");
   taskList.classList.remove("comp");
   taskList.classList.add("pend");
+  pendingBtn.classList.add("border", "border-4", "border-green-500");
+  allBtn.classList.remove("border", "border-4", "border-green-500");
+  completedBtn.classList.remove("border", "border-4", "border-green-500");
   tasksOutput("pending");
 });
