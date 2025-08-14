@@ -43,10 +43,7 @@ function getWeather() {
 }
 
 searchBtn.addEventListener("click", getWeather);
-searchForm.addEventListener("click", () => {
-  searchForm.value = "";
-  results.innerHTML = "";
-})
+
 searchForm.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     e.preventDefault(); 
