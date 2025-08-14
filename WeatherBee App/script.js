@@ -5,7 +5,8 @@ const results = document.getElementById("results");
 const API_key = "fd559b01ec0cfab212e35e7c9aab1930";
 
 function getWeather() {
-  if (!searchForm.value.trim()) {
+  // If the search field is empty
+  if (searchForm.value.trim() === "") {
     alert("Please enter a Location!");
     return;
   }
@@ -42,10 +43,13 @@ function getWeather() {
 }
 
 searchBtn.addEventListener("click", getWeather);
-
+searchForm.addEventListener("click", () => {
+  searchForm.value = "";
+  results.innerHTML = "";
+})
 searchForm.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
-    e.preventDefault(); // stops form submission
+    e.preventDefault(); 
     getWeather();
   }
 });
